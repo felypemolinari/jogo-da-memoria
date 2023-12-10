@@ -1,18 +1,14 @@
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
-
+#include <windows.h>
+#include <locale.h>
 
 using namespace std;
 
 int main()
 {
-    cout << "___  ___ _____ ___  ___ _____ ______  _____   ___" << endl;
-    cout << "|  \/  ||  ___||  \/  ||  _  || ___ \|_   _| / _ \ "  << endl;
-    cout << "| .  . || |__  | .  . || | | || |_/ /  | |  / /_\ \ " << endl;
-    cout << "| |\/| ||  __| | |\/| || | | ||    /   | |  |  _  |" << endl;
-    cout << "| |  | || |___ | |  | |\ \_/ /| |\ \  _| |_ | | | |"<< endl;
-    cout << "\_|  |_/\____/ \_|  |_/ \___/ \_| \_| \___/ \_| |_/"<< endl;
+    setlocale(LC_ALL, "Portuguese");
 
     /// Definir Matriz Principal
 
@@ -33,20 +29,12 @@ int main()
         }
     }
 
-   /*for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 4; j++){
-            cout << matrizPrincipal[i][j] << " ";
-        }
-        cout << endl;
-    }*/
-
     /// Matriz Gabarito
 
     int matrizGabarito[4][4];
 
-    /*srand(time(NULL));
-    int escolhaGabarito = rand() % 4 + 1;*/
-    int escolhaGabarito = 1;
+    srand(time(NULL));
+    int escolhaGabarito = rand() % 4 + 1;
 
     switch (escolhaGabarito) {
         case 1: //Sem Modificação
@@ -56,13 +44,6 @@ int main()
                 }
             }
 
-            for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    cout << matrizGabarito[i][j] << " ";
-                }
-                cout << endl;
-            }
-
             break;
         case 2: //Transposta
             for(int i = 0; i < 4; i++){
@@ -70,12 +51,6 @@ int main()
                     matrizGabarito[i][j] = matrizPrincipal[j][i];
                 }
             }
-            /*for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    cout << matrizGabarito[i][j] << " ";
-                }
-                cout << endl;
-            }*/
 
             break;
         case 3: //Invertida por linha
@@ -85,27 +60,13 @@ int main()
                 }
             }
 
-            /*for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    cout << matrizGabarito[i][j] << " ";
-                }
-                cout << endl;
-            }*/
-
             break;
-        default: //Invertida por coluna
+        case 4: //Invertida por coluna
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
                     matrizGabarito[i][j] = matrizPrincipal[i][4 - 1 -j];
                 }
             }
-
-            /*for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    cout << matrizGabarito[i][j] << " ";
-                }
-                cout << endl;
-            }*/
 
             break;
     }
@@ -121,13 +82,6 @@ int main()
         }
     }
 
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 4; j++){
-            cout << matrizJogo[i][j] << " ";
-        }
-        cout << endl;
-    }
-
 
     /// Jogadas
 
@@ -138,17 +92,38 @@ int main()
     int linha1, coluna1, linha2, coluna2;
     string resposta;
     int matrizCartaVirada[4][4] = {0};
+    int matrizVerifPosi[4][4] = {0};
 
     do{
+        cout <<
+            "___  ___ _____ ___  ___ _____ ______ __   __  _____   ___  ___  ___ _____            \n"
+            "|  \\/  ||  ___||  \\/  ||  _  || ___ \\\\ \\ / / |  __ \\ / _ \\ |  \\/  ||  ___|   \n"
+            "| .  . || |__  | .  . || | | || |_/ / \\ V /  | |  \\// /_\\ \\| .  . || |__         \n"
+            "| |\\/| ||  __| | |\\/| || | | ||    /   \\ /   | | __ |  _  || |\\/| ||  __|        \n"
+            "| |  | || |___ | |  | |\\ \\_/ /| |\\ \\   | |   | |_\\ \\| | | || |  | || |___      \n"
+            "\\_|  |_/\\____/ \\_|  |_/ \\___/ \\_| \\_|  \\_/    \\____/\\_| |_/\\_|  |_/\\____/ \n"
+        << endl;
 
-        cout << "Digite números de 0 à 3 " << endl;
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                cout << matrizJogo[i][j] << " ";
+            }
+            cout << endl;
+        }
 
-        cout << "Digite as duas primeiras cordenas [linha][coluna]: ";
+        cout << "Digite números de 0 à 3: " << endl;
+
+        cout << "Digite as duas primeiras coordenas [linha][coluna]: ";
         cin >> linha1 >> coluna1;
+
+        while(matrizGabarito[linha1][coluna1] == matrizVerifPosi[linha1][coluna1]){
+            cout << "Valor já foi inserido e validado. " << endl;
+            cin >> linha1 >> coluna1;
+        }
 
         while(linha1 < 0 || linha1 > 3 || coluna1 < 0 || coluna1 > 3){
             cout << "Valor Invalido, Insira Novamente:" << endl;
-            cout << "Digite as duas primeiras cordenas [linha][coluna]: ";
+            cout << "Digite as duas primeiras coordenas [linha][coluna]: ";
             cin >> linha1 >> coluna1;
         }
 
@@ -162,12 +137,22 @@ int main()
 
         cout << endl;
 
-        cout << "Digite as duas segundas cordenas [linha][coluna]: ";
+        cout << "Digite as duas segundas coordenas [linha][coluna]: ";
         cin >> linha2 >> coluna2;
+
+        while(linha1 == linha2 && coluna1 == coluna2){
+            cout << "Numeros invalidos" << "\n" << "Insira a segunda coordenada novamente: " << endl;
+            cin >> linha2 >> coluna2;
+        }
+
+        while(matrizGabarito[linha2][coluna2] == matrizVerifPosi[linha2][coluna2]){
+            cout << "Valor já foi inserido e validado. " << endl;
+            cin >> linha2 >> coluna2;
+        }
 
         while(linha2 < 0 || linha2 > 3 || coluna2 < 0 || coluna2 > 3){
             cout << "Valor Invalido, Insira Novamente:" << endl;
-            cout << "Digite as duas primeiras cordenas [linha][coluna]: ";
+            cout << "Digite as duas segundas coordenas [linha][coluna]: ";
             cin >> linha2 >> coluna2;
         }
 
@@ -186,54 +171,62 @@ int main()
                 if(matrizGabarito[linha1][coluna1] == matrizGabarito[linha2][coluna2]){
                     matrizJogo[linha1][coluna1] = matrizGabarito[linha1][coluna1];
                     matrizJogo[linha2][coluna2] = matrizGabarito[linha2][coluna2];
-                    cout << matrizJogo[i][j] << " ";
-                } else {
-                    cout << matrizJogo[i][j] << " ";
                 }
             }
-            cout << endl;
         }
+
+        cout << endl;
 
         if(matrizGabarito[linha1][coluna1] == matrizGabarito[linha2][coluna2]){
             resposta = "ACERTOU!";
-            cout << resposta;
+            cout << resposta << endl;
             paresDescobertos++;
-            cout << "Pares Descobertos: " << paresDescobertos << endl;
         } else {
             resposta = "ERROU! TENTE NOVAMENTE!";
-            cout << resposta;
+            cout << resposta << endl;
         }
 
     cout << endl;
+S
+    system("PAUSE");
+    system("CLS");
 
-    if(resposta == "ACERTOU!"){
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                cout << matrizJogo[i][j] << " ";
-            }
-            cout << endl;
-        }
-        system("read 0 -p");
-        system("clear");
+    jogadasRealizadas++;
+    cout << "Jogadas Realizadas: " << jogadasRealizadas << endl;
 
-           for(int i = 0; i < 4; i++){
-                for(int j = 0; j < 4; j++){
-                    cout << matrizJogo[i][j] << " ";
-        }
-        cout << endl;
-     }
-        jogadasRealizadas++;
-        cout << "Jogadas Realizadas: " << jogadasRealizadas << endl;
-    }
+    cout << "Pares Descobertos: " << paresDescobertos << endl;
 
     matrizCartaVirada[linha1][coluna1] = {0};
     matrizCartaVirada[linha2][coluna2] = {0};
     matrizCartaVirada[linha1][coluna1] = matrizJogo[linha1][coluna1];
     matrizCartaVirada[linha2][coluna2] = matrizJogo[linha2][coluna2];
 
+    matrizVerifPosi[linha1][coluna1] = matrizJogo[linha1][coluna1];
+    matrizVerifPosi[linha2][coluna2] = matrizJogo[linha2][coluna2];
+
     } while (jogadasRealizadas < totalJogadas && paresDescobertos < totalPares);
 
+    if(jogadasRealizadas < totalJogadas && paresDescobertos == totalPares){
+        cout <<
+            " _   _  _____  _____  _____  _____ ______ __   __ _         \n"
+            "| | | ||_   _|/  __ \\|_   _||  _  || ___ \\\\ \\ / /| |    \n"
+            "| | | |  | |  | /  \\/  | |  | | | || |_/ / \\ V / | |      \n"
+            "| | | |  | |  | |      | |  | | | ||    /   \\ /  | |       \n"
+            "\\ \\_/ / _| |_ | \\__/\\  | |  \\ \\_/ /| |\\ \\   | |  |_|\n"
+            " \\___/  \\___/  \\____/  \\_/   \\___/ \\_| \\_|  \\_/  (_)\n"
+        << endl;
+    }
+    else{
+        cout <<
+            "______  _____ ______  _____   ___   _____     \n"
+            "|  _  \\|  ___||  ___||  ___| / _ \\ |_   _|  \n"
+            "| | | || |__  | |_   | |__  / /_\\ \\  | |    \n"
+            "| | | ||  __| |  _|  |  __| |  _  |  | |      \n"
+            "| |/ / | |___ | |    | |___ | | | |  | |      \n"
+            "|___/  \\____/ \\_|    \\____/ \\_| |_/  \\_/ \n"
+        << endl;
 
+    }
 
     return 0;
 }
