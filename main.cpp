@@ -203,22 +203,22 @@ int main()
             cout << "ERROU! TENTE NOVAMENTE!" << endl;
         }
 
-    cout << endl;
+        cout << endl;
 
-    system("PAUSE");
-    system("CLS");
+        system("PAUSE");
+        system("CLS");
 
-    // Mensagens do total de jogadas realizadas e pares descobertos.
-    jogadasRealizadas++;
-    cout << "Jogadas Realizadas: " << jogadasRealizadas << endl;
-    cout << "Pares Descobertos: " << paresDescobertos << endl;
+        // Mensagens do total de jogadas realizadas e pares descobertos.
+        jogadasRealizadas++;
+        cout << "Jogadas Realizadas: " << jogadasRealizadas << endl;
+        cout << "Pares Descobertos: " << paresDescobertos << endl;
 
-    // Reatribuição dos valores.
-    matrizCartaVirada[linha1][coluna1] = matrizJogo[linha1][coluna1];
-    matrizCartaVirada[linha2][coluna2] = matrizJogo[linha2][coluna2];
+        // Reatribuição dos valores.
+        matrizCartaVirada[linha1][coluna1] = matrizJogo[linha1][coluna1];
+        matrizCartaVirada[linha2][coluna2] = matrizJogo[linha2][coluna2];
 
-    matrizVerifPosi[linha1][coluna1] = matrizJogo[linha1][coluna1];
-    matrizVerifPosi[linha2][coluna2] = matrizJogo[linha2][coluna2];
+        matrizVerifPosi[linha1][coluna1] = matrizJogo[linha1][coluna1];
+        matrizVerifPosi[linha2][coluna2] = matrizJogo[linha2][coluna2];
 
     } while (jogadasRealizadas < totalJogadas && paresDescobertos < totalPares);
 
