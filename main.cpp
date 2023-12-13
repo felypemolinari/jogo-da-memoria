@@ -17,7 +17,7 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    /// Definir Matriz Principal.
+    /// Matriz Principal.
 
     int matrizPrincipal[4][4]; // Definimos a matriz principal.
     int valor = 1; // Variável de controle para os pares.
@@ -45,7 +45,7 @@ int main()
 
     // Switch case para a definição de matriz.
     switch (escolhaGabarito) {
-        case 1: //Sem Modificação
+        case 1: // Sem Modificação.
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
                     matrizGabarito[i][j] = matrizPrincipal[i][j];
@@ -53,7 +53,7 @@ int main()
             }
 
             break;
-        case 2: //Transposta
+        case 2: // Transposta.
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
                     matrizGabarito[i][j] = matrizPrincipal[j][i];
@@ -61,7 +61,7 @@ int main()
             }
 
             break;
-        case 3: //Invertida por linha
+        case 3: // Invertida por linha.
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
                     matrizGabarito[i][j] = matrizPrincipal[4 - 1 - i][j];
@@ -69,7 +69,7 @@ int main()
             }
 
             break;
-        case 4: //Invertida por coluna
+        case 4: // Invertida por coluna.
             for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 4; j++){
                     matrizGabarito[i][j] = matrizPrincipal[i][4 - 1 -j];
@@ -79,7 +79,7 @@ int main()
             break;
     }
 
-    /// Matriz Jogo
+    /// Matriz Jogo.
 
     int matrizJogo[4][4]; // Definimos matriz jogo.
 
@@ -90,7 +90,7 @@ int main()
         }
     }
 
-    /// Jogadas
+    /// Jogadas.
 
     int totalPares = 8; // Contagem dos pares.
     int totalJogadas = 8 * 3; // Contagem total de jogadas.
@@ -121,19 +121,20 @@ int main()
 
         cout << "Digite números de 0 à 3: " << endl;
 
-        cout << "Digite as duas primeiras coordenas [linha][coluna]: ";
+        cout << "Digite as duas primeiras coordenadas [linha][coluna]: ";
         cin >> linha1 >> coluna1;
 
-        // Verificar se o valor está dentro do desejado.
+        // Verificar se o valor está dentro do desejado(0 à 3).
         while(linha1 < 0 || linha1 > 3 || coluna1 < 0 || coluna1 > 3){
-            cout << "Valor Invalido, Insira Novamente:" << endl;
-            cout << "Digite as duas primeiras coordenas [linha][coluna]: ";
+            cout << "Valor inválido, insira novamente:" << endl;
+            cout << "Digite as duas primeiras coordenadas [linha][coluna]: ";
             cin >> linha1 >> coluna1;
         }
 
         // Verificar se o valor já foi achado anteriormente.
         while(matrizGabarito[linha1][coluna1] == matrizVerifPosi[linha1][coluna1]){
             cout << "Valor já foi inserido e validado. " << endl;
+            cout << "Digite as duas primeiras coordenadas novamente [linha][coluna]: ";
             cin >> linha1 >> coluna1;
         }
 
@@ -143,12 +144,12 @@ int main()
                 matrizCartaVirada[linha1][coluna1] = matrizGabarito[linha1][coluna1];
                 cout << matrizCartaVirada[i][j] << " ";
             }
-        cout << endl;
+            cout << endl;
         }
 
         cout << endl;
 
-        cout << "Digite as duas segundas coordenas [linha][coluna]: ";
+        cout << "Digite as duas segundas coordenadas [linha][coluna]: ";
         cin >> linha2 >> coluna2;
 
         // Verificar se as primeiras coordenadas são iguais as segundas.
@@ -159,14 +160,15 @@ int main()
 
         // Verificar se o valor está dentro do desejado.
         while(linha2 < 0 || linha2 > 3 || coluna2 < 0 || coluna2 > 3){
-            cout << "Valor Inválido, Insira Novamente:" << endl;
-            cout << "Digite as duas segundas coordenas [linha][coluna]: ";
+            cout << "Valor inválido, insira novamente:" << endl;
+            cout << "Digite as duas segundas coordenadas [linha][coluna]: ";
             cin >> linha2 >> coluna2;
         }
 
         // Verificar se o valor já foi achado anteriormente.
         while(matrizGabarito[linha2][coluna2] == matrizVerifPosi[linha2][coluna2]){
             cout << "Valor já foi inserido e validado. " << endl;
+            cout << "Digite as duas segundas coordenadas novamente [linha][coluna]: ";
             cin >> linha2 >> coluna2;
         }
 
@@ -176,12 +178,12 @@ int main()
                 matrizCartaVirada[linha2][coluna2] = matrizGabarito[linha2][coluna2];
                 cout << matrizCartaVirada[i][j] << " ";
             }
-        cout << endl;
+            cout << endl;
         }
 
         cout << endl;
 
-        // For para atribuir os valores para a matriz jogo.
+        // For para atribuir os valores à matriz jogo.
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
 
@@ -195,7 +197,7 @@ int main()
 
         cout << endl;
 
-        // Estrutura de seleção para exibição de resultados.
+        // Estrutura de seleção para exibição do texto do resultado.
         if(matrizGabarito[linha1][coluna1] == matrizGabarito[linha2][coluna2]){
             cout << "ACERTOU!" << endl;
             paresDescobertos++;
@@ -220,7 +222,7 @@ int main()
         matrizVerifPosi[linha1][coluna1] = matrizJogo[linha1][coluna1];
         matrizVerifPosi[linha2][coluna2] = matrizJogo[linha2][coluna2];
 
-    } while (jogadasRealizadas < totalJogadas && paresDescobertos < totalPares);
+    } while (jogadasRealizadas < totalJogadas || paresDescobertos < totalPares);
 
     // Estrutura de seleção para mostar o resultado final.
     if(jogadasRealizadas < totalJogadas || paresDescobertos == totalPares){
