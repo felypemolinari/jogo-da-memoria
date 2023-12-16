@@ -8,7 +8,7 @@
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
-#include <windows.h>
+
 #include <locale.h>
 
 using namespace std;
@@ -222,10 +222,10 @@ int main()
         matrizVerifPosi[linha1][coluna1] = matrizJogo[linha1][coluna1];
         matrizVerifPosi[linha2][coluna2] = matrizJogo[linha2][coluna2];
 
-    } while (jogadasRealizadas < totalJogadas || paresDescobertos < totalPares);
+    } while (jogadasRealizadas < totalJogadas && paresDescobertos < totalPares);
 
     // Estrutura de seleção para mostar o resultado final.
-    if(jogadasRealizadas < totalJogadas || paresDescobertos == totalPares){
+    if(paresDescobertos == totalPares){
         cout <<
             " _   _  _____  _____  _____  _____ ______ __   __ _         \n"
             "| | | ||_   _|/  __ \\|_   _||  _  || ___ \\\\ \\ / /| |    \n"
