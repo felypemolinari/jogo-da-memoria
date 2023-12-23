@@ -8,7 +8,7 @@
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
-
+#include <windows.h>
 #include <locale.h>
 
 using namespace std;
